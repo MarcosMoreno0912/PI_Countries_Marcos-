@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
   // defino el modelo
   const allowedContinents = ['África','Africa','América del Norte', 'America del Norte', 'América Central','America Central', 'América del Sur', 'America del Sur', 'Asia', 'Europa', 'Oceanía', 'Oceania', 'Antártida', 'Antartida'];
   sequelize.define('Country', {
-    Id: {
+    id: {
       type: DataTypes.STRING(3),
       allowNull: false,
+      primaryKey: true,
     },
     Name: {
       type: DataTypes.TEXT,
@@ -34,6 +35,14 @@ module.exports = (sequelize) => {
     Subregión: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    Area: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      get() {
+        const valor = this.getDataValue('area');
+        return value ? `${value} km²` : null;
+      },
     },
     Population: {
       type: DataTypes.BIGINT,
