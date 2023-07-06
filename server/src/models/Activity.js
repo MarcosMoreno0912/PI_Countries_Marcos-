@@ -4,6 +4,11 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Activity', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.uuidv4,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,7 +19,7 @@ module.exports = (sequelize) => {
     	validate: {
     		min: 1,
     		max: 5,
-        isEven(value) {
+        isOdd(value) {
           if(value < 1 || value > 5) {
             throw new Error('Sólo se admiten valores entre 1 y 5 inclusive.');
           }
@@ -27,7 +32,7 @@ module.exports = (sequelize) => {
       validate: {
         min: 1,
         max: 24,
-        isEven(value) {
+        isOdd(value) {
           if(value < 1 || value > 24) {
             throw new Error('Inserte una duración entre 1 y 24hs');
           }

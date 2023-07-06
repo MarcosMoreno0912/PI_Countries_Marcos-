@@ -10,15 +10,15 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    Name: {
+    name: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Flag: {
+    flag: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Continent: {
+    continent: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
@@ -28,23 +28,19 @@ module.exports = (sequelize) => {
         },
       },
     },
-    Capital: {
+    capital: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Subregión: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    Area: {
+    area: {
       type: DataTypes.STRING,
       allowNull: true,
       get() {
         const valor = this.getDataValue('area');
-        return value ? `${value} km²` : null;
+        return valor ? `${valor} km²` : null;
       },
     },
-    Population: {
+    population: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
