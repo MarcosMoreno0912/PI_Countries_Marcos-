@@ -1,73 +1,54 @@
 const { Country } = require('../db.js');
 const { Activity } = require('../db.js');
+const { Op } = require('sequelize');
 
-const getCountries = async (req, res) => {
-	try{
+const getCountries = async () => {
+	try{ 
 		const countries = await Country.findAll({
-			include: [{ model: Activity }],
+			include: { 
+				model: Activity, 
+				through: { attributes: [] },
+			},
 		});
-		const countriesData = countries.map(country =>({
-			id: country.id,
-      		name: country.name,
-      		flag: country.flag,
-      		continent: country.continent,
-      		capital: country.capital,
-      		area: country.area,
-     		population: country.population,
-		}));
-		res.status(200).json(countriesData);
-	}catch(error) {
-		console.error('Error al obtener los países', error);
-		res.status(500).json({ error: 'Error al obtener los países' });
-	}
-};
-
-const getCountryById = async (req, res) => {
-	const idPais = req.params.idPais.toUpperCase();
-
-	try{
-		const country = await Country.findOne({
-			where: { id: idPais },
-			include: [{ model: Activity }],
-		});
-
-		if(country){
-			return res.status(200).json(country);
-		}else{
-			return res.status(404).json({ error: 'País no encontrado' });
-		}
+		return countries;
 	}catch(error){
-		console.error('Error al obtener el detalle del país', error);
-		res.status(500).json({ error: 'Error al obtener el detalle del país' });
+		throw new Error('La información no existe o hubo un error al obtener los países');
 	}
 };
 
-const searchCountriesByName = async (req, res) => {
-	const name = req.query.name;
-
-	try{
-		const countries = await Country.findAll({
-			where: { name: { [Op.like]: `%${name}%` } },
-			include: [{ model: Activity }],
+const getCountryById = async (idPais) => {
+	try{ 
+		const country = await Country.findAll({
+			where: {
+				id: idPais.toUpperCase(),
+			},
+			include: {
+				model: Activity,
+				through: { attributes: [] },
+			},
 		});
+		return country;
+	}catch(error){
+		throw new Error('Error al obtener el país por ID');
+	}	
+};
 
-		if(countries.length === 0){
-			return res.status(404).json({ error: 'Países no encontrados' });
-		}
-		const countriesData = countries.map(country => ({
-			id: country.id,
-      		name: country.name,
-      		flag: country.flag,
-      		continent: country.continent,
-      		capital: country.capital,
-      		area: country.area,
-      		population: country.population,
-		}));
-
-		res.status(200).json(countriesData);
-	} catch(error){
-		console.error('Error al buscar países por nombre', error);
-		res.status(500).json({ error: 'Error al buscar los países por nombre' });	
+const searchCountriesByName = async (name) => {
+	try{
+		const country = await Country.findAll({
+			where: {
+				name: {
+					[Op.iLike]: `%${name}%`,
+				},
+			},
+			include: {
+				model: Activity,
+				through: { attributes: [] },
+			},
+		});
+		return country;
+	}catch(error){
+		throw new Error('La información no existe o hubo un error al obtener los países');
 	}
 };
 

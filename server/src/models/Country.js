@@ -43,8 +43,9 @@ module.exports = (sequelize) => {
     population: {
       type: DataTypes.BIGINT,
       allowNull: false,
-    },
-  }, {
+    }, 
+  }, 
+    {
     timestamps: false
   });
 };
