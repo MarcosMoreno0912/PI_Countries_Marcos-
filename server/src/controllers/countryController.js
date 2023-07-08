@@ -4,12 +4,7 @@ const { Op } = require('sequelize');
 
 const getCountries = async () => {
 	try{ 
-		const countries = await Country.findAll({
-			include: { 
-				model: Activity, 
-				through: { attributes: [] },
-			},
-		});
+		const countries = await Country.findAll();
 		return countries;
 	}catch(error){
 		throw new Error('La información no existe o hubo un error al obtener los países');
@@ -40,10 +35,6 @@ const searchCountriesByName = async (name) => {
 				name: {
 					[Op.iLike]: `%${name}%`,
 				},
-			},
-			include: {
-				model: Activity,
-				through: { attributes: [] },
 			},
 		});
 		return country;

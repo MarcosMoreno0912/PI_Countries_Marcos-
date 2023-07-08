@@ -7,15 +7,18 @@ const {
 const getCountriesHandler = async (req, res) => {
 	const { name } = req.query;
 	try {
-		if(name){
-			const queryName = await searchCountriesByName(name);
-			res.status(200).json(queryName);
-		}else{
+		if(!name){
 			const allCountries = await getCountries();
-			res.status(200).json(allCountries);
+		    res.status(200).json(allCountries);
 		}
+		const country = await searchCountriesByName(name);
+
+		if(country.length === 0){
+			return res.status(404).json({ error: 'No hay países con ese nombre o no se puede obtener '});
+		}
+		res.status(200).json(country);
 	} catch(error){
-		console.error('La información no existe o hubo un error al obtener los países')
+		console.error('Ocurrió un error al obtener los países')
 		res.status(500).json({ error: error.message });
 	}
 };
@@ -23,14 +26,18 @@ const getCountriesHandler = async (req, res) => {
 const getCountriesByIdHandler = async (req, res) => {
 	const { idPais } = req.params;
 	try {
-		const idParam = await getCountryById(idPais);
-		res.status(200).json(idParam);
+		const country = await getCountryById(idPais);
+		if(country.length > 0){
+			res.status(200).json(country);
+		}else{
+			res.status(404).send('No se encontró un país con el ID proporcionado');
+		}		
 	}catch(error){
 		console.error('Error al obtener el país por ID');
 		res.status(500).json({ error: error.message });
 	}
 };
-
+	
 module.exports = {
 	getCountriesHandler,
 	getCountriesByIdHandler
