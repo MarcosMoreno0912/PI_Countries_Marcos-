@@ -1,0 +1,8 @@
+.cardsContainer {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	border-radius: 10px;
+	flex-wrap: wrap;
+	gap: 1em;
+}

@@ -1,0 +1,11 @@
+.paginated {
+	background-color: red;
+	display: flex;
+	margin: 5px;
+}
+
+.paginated .numbersPage {
+	background-color: lightskyblue;
+	font-weight: bold;
+	font-size: 15px;
+}

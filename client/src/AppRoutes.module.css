@@ -1,0 +1,6 @@
+.routes {
+	display: inline-grid;
+	min-width: 100%;
+	padding: 5px;
+	background-color: lightgrey;
+}
