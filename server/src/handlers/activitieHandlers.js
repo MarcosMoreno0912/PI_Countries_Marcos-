@@ -22,10 +22,10 @@ const createActivityHandler = async (req, res) => {
 const getActivityHandler = async (req, res) => {
 	try{
 		const activities = await getAllActivities();
-		res.status(200).json(activities);
+		return res.status(200).json(activities);
 	} catch(error) {
 		console.error('Error al obtener las actividades turísticas')
-		res.status(500).json({ error: error.message });
+		return res.status(500).json({ error: error.message });
 	}
 };
 
@@ -33,10 +33,10 @@ const deleteActivityHandler = async (req, res) => {
 	const { name } = req.params;
 	try{
 		const activitieDeleted = await deleteActivity(name);
-		res.status(200).json(activitieDeleted);
+		return res.status(200).json(activitieDeleted);
 	}catch(error){
 		console.error('Error al intentar eliminar la actividad turística')
-		res.status(500).json({ error: error.message });
+		return res.status(500).json({ error: error.message });
 	}
 }; 
 
