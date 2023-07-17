@@ -1,0 +1,54 @@
+.navContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height: 70px;
+	margin: 5px;
+	border-radius: 15px;
+	background-color: #393e46;
+	align-content: center;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.navContainer label {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Prompt', sans-serif;
+	font-weight: bolder;
+	font-size: 20px;
+	margin-right: 0px;
+	padding-right: 0px;
+	margin-left: 300px;
+}
+
+ .exitButton {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+    font-family: 'Prompt', sans-serif;
+	font-weight: bolder;
+	font-size: 17px;
+	width: 70px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: #f96d00;
+}
+
+.createButton {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Prompt', sans-serif;
+	font-weight: bolder;
+	font-size: 17px;
+	width: 150px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: #f96d00;
+}
+

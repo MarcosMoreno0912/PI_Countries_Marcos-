@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountries, getActivities, filterCountriesByActivity } from '../../redux/actions.js';
-import style from './Filters&orders.modules.css?inline';
+import style from './Filters&orders.module.css?inline';
 
 
 const ActivityFilter = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Paginated.module.css?inline';
+import style from './Paginated.module.css';
 import { Link } from 'react-router-dom';
 
 const Paginated = ({ countriesPerPage, totalCountries, currentPage, paginado }) => {
@@ -8,12 +8,12 @@ const Paginated = ({ countriesPerPage, totalCountries, currentPage, paginado }) 
 
 	return (
 		<nav className={style.paginated}>
-			<ul>
+			<ul className={style.listPag}>
 				{Array.from({ length: pageNumbers }, (_, index) => index + 1).map(
 					(number) => ( 
-					<li className={`${style.numbersPage} ${number === currentPage ? style.active : ''}`} key={number} > 
+					<div className={`${style.numbersPage} ${number === currentPage ? style.active : ''}`} key={number} > 
 						<button onClick={() => paginado(number)}>{number}</button>
-					</li>
+					</div>
 					) 
 				)}
 			</ul>

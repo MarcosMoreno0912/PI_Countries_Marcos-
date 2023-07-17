@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountries, getActivities, filterCountriesByContinent, sortCountriesAlphabet, sortCountriesByPopulation } from '../../redux/actions.js';
 import ActivityFilter from './ActivityFilter.jsx';
+import style from './Filters&orders.module.css';
 
 const Filters = () => {
 	const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Filters = () => {
 	};
 
 	return (
-		<div>
+		<div className={style.filters}>
 			<select onChange={handleContinentFilter}>
 				<option value= "">All Continents</option>
 				<option value= "Americas">Americas</option>

@@ -4,3 +4,8 @@
 	padding: 5px;
 	background-color: lightgrey;
 }
+
+.homePage{
+	height: 100vh;
+	width: 100vw;
+}

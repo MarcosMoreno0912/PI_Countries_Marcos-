@@ -1,0 +1,31 @@
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body, #root {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* main.module.css */
+/* ...otros estilos... */
+
+/* Estilos personalizados para React Toastify */
+.Toastify {
+  position: fixed;
+  z-index: 9999;
+  top: 20px;
+  right: 20px;
+}
+.Toastify__toast-container {
+  padding: 0;
+}
+.Toastify__toast {
+  margin-bottom: 10px;
+}

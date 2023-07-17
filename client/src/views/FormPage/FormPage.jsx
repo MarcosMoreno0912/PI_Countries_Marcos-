@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getCountries, createActivity } from '../../redux/actions.js';
+import { toast } from 'react-toastify';
+import CountrySelect from '../../components/ActivityForm/CountrySelectForm.jsx';
+import { validate, resetForm } from './FormPageUtils.js';
 
 const FormPage = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { countries } = useSelector((state) => state)
 
 	useEffect(() => {
@@ -19,6 +24,7 @@ const FormPage = () => {
 	});
 
 	const [errors, setErrors] = useState({});
+//	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const changeHandler = (event) => {
 		const { name, value } = event.target
@@ -27,55 +33,23 @@ const FormPage = () => {
 			...prevForm,
 			[name]: value,
 		}));
+		
+//		const newErrors = {};
+//		setErrors(newErrors);
+		validate({ ...form, [name]: value }, setErrors);
+	};  
 
-		validate({ ...form, [name]: value });
-	}; 
-
-	const validate = (formData) => {
-		const { name, difficulty, duration, season } = formData;
-		const newErrors = {};
-
-		if(!name) {
-			newErrors.name = 'Name is required';
-		}else if((name && name.length > 30) || (name && name.length < 3)){
-			newErrors.name = 'Name must be between 3 and 30 characters';
-		}	 
-
-		if(!difficulty) {
-			newErrors.difficulty = 'Difficulty is required';
-		}else if(difficulty < 1 || difficulty > 5) {
-			newErrors.difficulty = 'Difficulty must be between 1 and 5';
-		} 
-			
-		if(!duration) {
-		  	newErrors.duration = 'Duration is required';
-		}else if(duration < 1 || duration > 24){
-			newErrors.duration = 'Duration must be between 1 and 24 hours';
-		}
-
-		if(!season) {
-			newErrors.season = 'Season is required';
-		}else if(season !== 'Verano' && season !== 'Invierno' && season !== 'Otoño' && season !== 'Primavera'){
-			newErrors.season = 'Seasons: Verano, Invierno, Otoño y Primavera'
-		}
-//		setForm({ ...form, [name]: value })
-		setErrors(newErrors);
-	}; 
-
-	const handleCountryChange = (event) => {
-		const selectedCountries = Array.from(event.target.options)
-			.filter((option) => option.selected)
-			.map((option) => option.value);
+	const handleCountryChange = (selectedCountryIds) => {
 		setForm((prevForm) => ({
 			...prevForm,
-			countries: selectedCountries,
+			countries: selectedCountryIds,
 		}));
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		if(Object.keys(errors).length === 0){
+		if(Object.keys(errors).length === 0 && form.countries.length > 0){
 			const { name, difficulty, duration, season, countries } = form;
 			const activityData = {
 				name,
@@ -87,21 +61,14 @@ const FormPage = () => {
 
 			dispatch(createActivity(form));
 
-			window.alert('Activity created succesfully!')
-			resetForm();
+			toast.success('Activity created succesfully!')
+			resetForm(setForm, setErrors);
 		}
 	};
 
-	const resetForm = () => {
-		setForm({
-			name: '',
-			difficulty: 0,
-			duration: 0,
-			season: "",
-			countries: [],
-		});
-		setErrors({});
-	}
+	const handleBackHome = () => {
+		navigate('/home')
+	};
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -126,18 +93,18 @@ const FormPage = () => {
 				{errors.season && <span>{errors.season}</span>}	
 			</div>
 			<div>
-				<label>Countries</label>
-				<select value={form.countries} onChange={handleCountryChange} name="Countries" multiple>
-					<option disabled value="">-- Seleccione países --</option>
-					{countries && countries.map((country) => (
-						<option key={country.id} value={country.id}>
-							{`${country.id}: ${country.name}`}
-						</option>					
-					))}
-				</select>
+				<label>Destino:</label>
+				<CountrySelect 
+					countries={countries}
+					selectedCountries={form.countries}
+					handleCountryChange={handleCountryChange}
+				/>	
 			</div>
 			<div>
-				<button type="submit" disabled={Object.keys(errors).length > 0}>Crear Actividad</button>
+				<button type="submit" disabled={Object.keys(errors).length > 0 || form.countries.length === 0}>Crear Actividad</button>
+			</div>
+			<div>
+				<button onClick={handleBackHome}>Back to Home</button>
 			</div>
 		</form>
 	)

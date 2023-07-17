@@ -1,11 +1,27 @@
 .paginated {
-	background-color: red;
 	display: flex;
-	margin: 5px;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: space-around;
 }
 
-.paginated .numbersPage {
-	background-color: lightskyblue;
-	font-weight: bold;
+ul, .listPag {
+	display: flex;
+	list-style: none;
+	align-content: space-between;
+	align-items: center;
+}
+
+.paginated button {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	font-family: 'Prompt', sans-serif;
+	background-color: lightgrey;
+	font-weight: 700;
 	font-size: 15px;
+	border-radius: 3px;
 }

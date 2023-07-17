@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getCountriesDetail } from '../../redux/actions.js';
 import style from './Detail.module.css?inline'
+import { toast } from 'react-toastify';
 
  const DetailPage = () => {
-	const { idPais } = useParams(); 
+	const { idPais } = useParams();
+	const navigate = useNavigate(); 
 	
 	const dispatch = useDispatch();
 	const country = useSelector((state) => state.allCountries.find((c) => c.id === idPais));
@@ -15,7 +17,15 @@ import style from './Detail.module.css?inline'
 		dispatch(getCountriesDetail(idPais))
 	}, [idPais, dispatch]);
 
-	if(!country) return <p>Loading...</p>
+	const handleBack = () => {
+		navigate('/home')
+	}
+
+	const handleCreateAct = () => {
+		navigate('/createAct')
+	}
+
+	if(!country) return toast.success('Loading Country...')
 	
 	return (
 		<div className={style.detailContainer}>
@@ -39,13 +49,15 @@ import style from './Detail.module.css?inline'
             		</p>
             		<div>
                			<strong>Activities:</strong>{country.Activities && country.Activities.length ?
-                  		country.Activities.map(
-                     		(a, idx) => (<div key={idx}>
+                  		country.Activities.map((a, idx) => 
+                  			(<div key={idx}>
                         		<p><strong>{a.name}</strong> Difficulty: {a.difficulty}, Duration: {a.duration} hs., Season:  {a.season}</p>
                      		</div>))
-                  	: <div> No activities to show</div>
-            	}</div>
-         	</div> 
+                  	: <div> No activities to show</div>}
+                  	<button onClick={handleBack}>Back</button>
+                  	<button onClick={handleCreateAct}>Add Turistic Activity</button>
+            	</div>
+         	</div>
 		</div>
 	);
 };

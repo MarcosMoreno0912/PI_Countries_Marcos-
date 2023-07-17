@@ -1,0 +1,16 @@
+.filters {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+.filters button {
+	border-radius: 5px;
+	background-color: #bde4f4;
+	font-family: 'Prompt', sans-serif;
+	font-weight: 900;
+	font-size: 15px;
+}
