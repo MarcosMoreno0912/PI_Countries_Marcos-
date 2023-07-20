@@ -3,12 +3,17 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	height: 70px;
-	margin: 5px;
+	margin: 0px 5px;
 	border-radius: 15px;
 	background-color: #393e46;
+	opacity: 0.9;
 	align-content: center;
 	align-items: center;
 	justify-content: space-around;
+	max-width: 1750px;
+	position: center;
+	top: 0;
+	z-index: 100;
 }
 
 .navContainer label {
@@ -18,6 +23,7 @@
 	justify-content: center;
 	font-family: 'Prompt', sans-serif;
 	font-weight: bolder;
+	color: #f96d00;
 	font-size: 20px;
 	margin-right: 0px;
 	padding-right: 0px;

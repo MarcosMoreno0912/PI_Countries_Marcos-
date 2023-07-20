@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountries, getActivities} from '../../redux/actions.js';
 import CardsContainer from '../../components/CardsContainer/CardsContainer.jsx'; 
 import style from './Home.module.css';
-import Filters from '../../components/Filters&orders/Filters&orders.jsx';
+import Filters from '../../components/FiltersAndorders/FiltersAndorders.jsx';
 import Paginated from '../../components/Paginated/Paginated.jsx';
 
 const Home = () => {
@@ -21,18 +21,18 @@ const Home = () => {
 	};
 
 	return(
-		<div className={style.home}>
-			<Filters />
-			<Paginated 
-				countriesPerPage={countriesPerPage}
-				totalCountries={allCountries && allCountries.length}
-				currentPage={currentPage}
-				paginado={paginado}
-			/>
-			<div>	
-				<CardsContainer currentCountries={currentCountries}/>
+			<div className={style.home}>
+				<Filters />
+				<Paginated 
+					countriesPerPage={countriesPerPage}
+					totalCountries={allCountries && allCountries.length}
+					currentPage={currentPage}
+					paginado={paginado}
+				/>
+				<div>	
+					<CardsContainer currentCountries={currentCountries}/>
+				</div>
 			</div>
-		</div>
 	)
 }
 

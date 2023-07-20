@@ -5,16 +5,18 @@ import { getCountries, createActivity } from '../../redux/actions.js';
 import { toast } from 'react-toastify';
 import CountrySelect from '../../components/ActivityForm/CountrySelectForm.jsx';
 import { validate, resetForm } from './FormPageUtils.js';
+import style from './Form.module.css';
+import gifForm from '../../assets/gifForm.gif';
 
 const FormPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { countries } = useSelector((state) => state)
-
-	useEffect(() => {
+	const countries = useSelector((state) => state.countries)
+    
+    useEffect(() => {
 		dispatch(getCountries());
 	}, [dispatch])
-
+	
 	const [form, setForm] = useState({
 		name: "",
 		difficulty: 0,
@@ -24,42 +26,46 @@ const FormPage = () => {
 	});
 
 	const [errors, setErrors] = useState({});
-//	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const changeHandler = (event) => {
-		const { name, value } = event.target
+		const { name, value } = event.target;
 
 		setForm((prevForm) => ({
 			...prevForm,
 			[name]: value,
 		}));
-		
-//		const newErrors = {};
-//		setErrors(newErrors);
-		validate({ ...form, [name]: value }, setErrors);
+
+		const newErrors = validate({ ...form, [name]: value });
+		setErrors(newErrors)
 	};  
 
-	const handleCountryChange = (selectedCountryIds) => {
+	const handleCountryChange = (selectedCountries) => {
+		const countriesData = selectedCountries.map((countryId) => {
+			return countries.find((country) => country.id === countryId);
+		});
 		setForm((prevForm) => ({
 			...prevForm,
-			countries: selectedCountryIds,
+			countries: countriesData,
 		}));
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		if(Object.keys(errors).length === 0 && form.countries.length > 0){
+		const newErrors = validate(form);
+    	setErrors(newErrors);
+
+		if(Object.keys(newErrors).length === 0 && form.countries.length > 0){
 			const { name, difficulty, duration, season, countries } = form;
 			const activityData = {
 				name,
 				difficulty,
 				duration,
 				season,
-				countries: countries && countries.map((country) => country && country.slice(0, 3)),
-			};
+				countries: countries.map((country) => country.id),
+		    };
 
-			dispatch(createActivity(form));
+			dispatch(createActivity(activityData));
 
 			toast.success('Activity created succesfully!')
 			resetForm(setForm, setErrors);
@@ -71,42 +77,48 @@ const FormPage = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>Name</label>
-				<input type="text" value={form.name} onChange={changeHandler} name="name" />
-				{errors.name && <span>{errors.name}</span>}
-			</div>
-			<div>
-				<label>Difficulty</label>
-				<input type="number" value={form.difficulty} onChange={changeHandler} name="difficulty" />
-				{errors.difficulty && <span>{errors.difficulty}</span>}		
-			</div>
-			<div>
-				<label>Duration</label>
-				<input type="number" value={form.duration} onChange={changeHandler} name="duration" />
-				{errors.duration && <span>{errors.duration}</span>}
-			</div>
-			<div>
-				<label>Season</label>
-				<input type="text" value={form.season} onChange={changeHandler} name="season" />
-				{errors.season && <span>{errors.season}</span>}	
-			</div>
-			<div>
-				<label>Destino:</label>
-				<CountrySelect 
-					countries={countries}
-					selectedCountries={form.countries}
-					handleCountryChange={handleCountryChange}
-				/>	
-			</div>
-			<div>
-				<button type="submit" disabled={Object.keys(errors).length > 0 || form.countries.length === 0}>Crear Actividad</button>
-			</div>
-			<div>
-				<button onClick={handleBackHome}>Back to Home</button>
-			</div>
-		</form>
+		<div className={style.bodyForm}>
+			<h1>Plan your next adventure:</h1>
+			<form className={style.formComponent} onSubmit={handleSubmit}>
+				<div>
+					<img src={gifForm} alt="Form Activity" className={style.imageGif} />
+				</div>
+				<div className={style.errorName}>
+					<label>Name</label>
+					<input name="name" type="text" value={form.name} onChange={changeHandler} />
+					{errors.name && <span>{errors.name}</span>}
+				</div>
+				<div className={style.errorDifficulty}>
+					<label>Difficulty</label>
+					<input name="difficulty" type="number" value={form.difficulty} onChange={changeHandler} />
+					{errors.difficulty && <span>{errors.difficulty}</span>}		
+				</div>
+				<div className={style.errorDuration}>
+					<label>Duration</label>
+					<input name="duration" type="number" value={form.duration} onChange={changeHandler} />
+					{errors.duration && <span>{errors.duration}</span>}
+				</div>
+				<div className={style.errorSeason}>
+					<label>Season</label>
+					<input name="season" type="text" value={form.season} onChange={changeHandler} />
+					{errors.season && <span>{errors.season}</span>}	
+				</div>
+				<div>
+					<label>Destino:</label>
+					<CountrySelect 
+						countries={countries}
+						selectedCountries={form.countries}
+						handleCountryChange={handleCountryChange}
+				    />	
+				</div>
+				<div className={style.submitButton}>
+					<button type="submit" disabled={Object.keys(errors).length > 0 || form.countries && form.countries.length === 0}>Crear Actividad</button>
+				</div>
+				<div className={style.backButton}>
+					<button onClick={handleBackHome}>Back to Home</button>
+				</div>
+			</form>
+		</div>
 	)
 };
 

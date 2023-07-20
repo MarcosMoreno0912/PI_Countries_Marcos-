@@ -1,0 +1,19 @@
+.countrySelect .imageFlag {
+	width: 55px;
+	height: 35px;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.countrySelect .countryList{
+	max-height: 170px;
+	max-width: 270px;
+	overflow-y: auto;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.countrySelect .countryList span{
+	color: black;
+}
+

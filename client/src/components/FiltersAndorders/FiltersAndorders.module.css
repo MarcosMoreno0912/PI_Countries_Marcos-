@@ -1,0 +1,22 @@
+.filters {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	padding: 3px;
+	border: 2px solid #f96d00;
+	border-radius: 5px;
+	background-color: #393e46;
+}
+
+.filters button {
+	border-radius: 5px;
+	background-color: #bde4f4;
+	font-family: 'Prompt', sans-serif;
+	font-weight: 900;
+	font-size: 15px;
+	width: 150px;
+	height: 25px;
+}

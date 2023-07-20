@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCountriesDetail } from '../../redux/actions.js';
-import style from './Detail.module.css?inline'
+import style from './Detail.module.css'
 import { toast } from 'react-toastify';
 
  const DetailPage = () => {
@@ -28,10 +28,11 @@ import { toast } from 'react-toastify';
 	if(!country) return toast.success('Loading Country...')
 	
 	return (
+		<div className={style.detailBody}>
 		<div className={style.detailContainer}>
       		<h1>{country.name}</h1>
          	<img src={country.flag} alt={country.name} className={style.flagImage} />
-         		<div>
+         		<div className={style.info}>
             		<p>
                			<strong>Id:</strong> {country.id}
             		</p>
@@ -47,17 +48,20 @@ import { toast } from 'react-toastify';
             		<p>
                			<strong>Population:</strong> {country.population}
             		</p>
-            		<div>
-               			<strong>Activities:</strong>{country.Activities && country.Activities.length ?
+            		<div className={style.activity}>
+               			<p><strong>Activities:</strong></p>{country.Activities && country.Activities.length ?
                   		country.Activities.map((a, idx) => 
                   			(<div key={idx}>
                         		<p><strong>{a.name}</strong> Difficulty: {a.difficulty}, Duration: {a.duration} hs., Season:  {a.season}</p>
                      		</div>))
-                  	: <div> No activities to show</div>}
-                  	<button onClick={handleBack}>Back</button>
-                  	<button onClick={handleCreateAct}>Add Turistic Activity</button>
-            	</div>
-         	</div>
+                  		: <div> No activities to show</div>}   	
+            		</div>
+         		</div>
+         		<div className={style.buttonContainer}>
+            		<button className={style.backButton} onClick={handleBack}>Back</button>
+                 	<button className={style.addAct} onClick={handleCreateAct}>Add Turistic Activity</button>
+         		</div>
+		</div>
 		</div>
 	);
 };

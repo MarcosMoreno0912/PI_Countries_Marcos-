@@ -1,5 +1,4 @@
-export const validate = (formData, setErrors, setForm) => {
-
+export const validate = (formData) => {
 	const { name, difficulty, duration, season } = formData;
 	const newErrors = {};
 
@@ -16,7 +15,7 @@ export const validate = (formData, setErrors, setForm) => {
 	} 
 			
 	if(!duration) {
-		  newErrors.duration = 'Duration is required';
+		newErrors.duration = 'Duration is required';
 	}else if(duration < 1 || duration > 24){
 		newErrors.duration = 'Duration must be between 1 and 24 hours';
 	}
@@ -26,7 +25,7 @@ export const validate = (formData, setErrors, setForm) => {
 	}else if(season !== 'Verano' && season !== 'Invierno' && season !== 'Otoño' && season !== 'Primavera'){
 		newErrors.season = 'Seasons: Verano, Invierno, Otoño y Primavera'
 	}
-	setErrors(newErrors)
+	 return newErrors;
 };
 
 export const resetForm = (setForm, setErrors) => {
@@ -34,7 +33,7 @@ export const resetForm = (setForm, setErrors) => {
 		name: '',
 		difficulty: 0,
 		duration: 0,
-		season: "",
+		season: '',
 		countries: [],
 	});
 	setErrors({});

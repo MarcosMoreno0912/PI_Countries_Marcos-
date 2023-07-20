@@ -66,10 +66,10 @@ export const getActivities = () => {
 	}
 };
 
-export const createActivity = (formData) => {
+export const createActivity = (payload) => {
 	return async (dispatch) =>{
 		try {
-			const json = await axios.post(`http://localhost:3001/activities`, formData);
+			const json = await axios.post(`http://localhost:3001/activities`, payload);
 			dispatch({
 				type: CREATE_ACTIVITY,
 				payload: json.data,

@@ -1,3 +1,14 @@
+body {
+	background-image: url('../../assets/darkMap.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	max-width: 1200px;
+	height: 108vh;
+	margin: 0;
+	overflow-x: hidden;
+}
+
 .home {
 	display: flex;
 	flex-wrap: wrap;

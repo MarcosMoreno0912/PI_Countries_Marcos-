@@ -23,6 +23,19 @@
 	padding-left: 0px;
 }
 
+.clearButton {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	width: 70px;
+    height: 30px;
+	border-radius: 5px;
+	background-color: #f96d00;
+	margin-left: 0;
+}
+
 .searchButton {
 	display: flex;
 	flex-direction: row;

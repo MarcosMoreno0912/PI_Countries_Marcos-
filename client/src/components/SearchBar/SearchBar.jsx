@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchCountries } from '../../redux/actions.js';
 import style from './SearchBar.module.css';
+
 const SearchBar = () => {
 	const [searchCountry, setSearchCountry] = useState('');
 	const dispatch = useDispatch();
@@ -21,12 +22,11 @@ const SearchBar = () => {
         dispatch(searchCountries(searchCountry));
 	};
 
-
 	return (
 		<div className={style.searchB}>
 			<input className={style.searchInput} type="search" value={searchCountry} onChange={handleInputChange} placeholder="Buscar País" />
 			<button className={style.searchButton}onClick={handleSearch}>Search</button>
-			{searchCountry && <button onClick={handleClearSearch}>Clear</button>}		
+			{searchCountry && <button className={style.clearButton} onClick={handleClearSearch}>Clear</button>}		
 		</div>
 	)
 }
