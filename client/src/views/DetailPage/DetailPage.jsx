@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getCountriesDetail } from '../../redux/actions.js';
 import style from './Detail.module.css'
 import { toast } from 'react-toastify';
+import NavBar from '../../components/NavBar/NavBar.jsx';
 
  const DetailPage = () => {
 	const { idPais } = useParams();
@@ -29,9 +30,12 @@ import { toast } from 'react-toastify';
 	
 	return (
 		<div className={style.detailBody}>
-		<div className={style.detailContainer}>
-      		<h1>{country.name}</h1>
-         	<img src={country.flag} alt={country.name} className={style.flagImage} />
+			<div className={style.navBar}>
+				<NavBar />
+			</div>
+			<div className={style.detailContainer}>
+      			<h1>{country.name}</h1>
+         		<img src={country.flag} alt={country.name} className={style.flagImage} />
          		<div className={style.info}>
             		<p>
                			<strong>Id:</strong> {country.id}

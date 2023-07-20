@@ -67,7 +67,8 @@ const FormPage = () => {
 
 			dispatch(createActivity(activityData));
 
-			toast.success('Activity created succesfully!')
+//			toast.success('Activity created succesfully!')
+//Aquí agregar un mensaje de Success, que capture el status 201 desde el back y lo muestre.
 			resetForm(setForm, setErrors);
 		}
 	};
