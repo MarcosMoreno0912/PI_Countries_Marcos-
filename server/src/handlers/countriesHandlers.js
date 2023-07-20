@@ -5,7 +5,7 @@ const {
 } = require('../controllers/countryController.js');
 
 const getCountriesHandler = async (req, res) => {
-	const { name } = req.query;
+	const { name } = req.query || {};
 	try {
 		if(!name){
 			const allCountries = await getCountries();

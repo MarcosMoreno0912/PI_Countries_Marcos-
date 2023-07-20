@@ -23,6 +23,6 @@ router.get('/countries/:idPais', getCountriesByIdHandler);
 
 router.get('/activities', getActivityHandler);
 router.post('/activities', createActivityHandler);
-router.delete('/activities/:idPais', deleteActivityHandler)
+router.delete('/activities/name', deleteActivityHandler)
 
 module.exports = router;
