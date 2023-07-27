@@ -40,20 +40,13 @@ const getAllActivities = async () => {
 	}
 };
 
-const deleteActivity = async (name) => {
+const deleteActivity = async (activityId) => {
 	try {
-		const deleteActivities = await Activity.findOne({
-		 where: { 
-		 	name: {
-				[Op.like]: `%${name}%`,
-		 	}, 
-		 }, 
-		});
-
-		if(!deleteActivities) {
+		const activity = await Activity.findByPk(activityId)
+		if(!activity) {
 			throw new Error('Actividad turística no encontrada')
 		}
-		await deleteActivities.destroy();
+		await activity.destroy();
 		return { message: 'Actividad eliminada con éxito'};
 	
 	} catch(error){
@@ -61,8 +54,32 @@ const deleteActivity = async (name) => {
 	}
 };
 
+const updateActivity = async ( activityId, name, difficulty, duration, season, countries) => {
+	try {
+		const activity = await Activity.findByPk(activityId);
+		if(!activity) {
+			throw new Error('Actividad turística no encontrada');
+		}
+
+		activity.name = name;
+		activity.difficulty = difficulty;
+		activity.duration = duration;
+		activity.season = season;
+
+//		await activity.setCountries([]);
+//		await activity.addCountries(countries);
+		await activity.setCountries(countries);
+		await activity.save();
+
+		return activity;
+	} catch (error) {
+		throw new Error('Error al intentar actualizar la actividad');
+	}
+};
+
 module.exports = {
 	createActivity,
 	getAllActivities,
-	deleteActivity
+	deleteActivity,
+	updateActivity, 
 };
