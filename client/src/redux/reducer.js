@@ -8,6 +8,8 @@ import {
 	SORT_COUNTRIES_BY_POPULATION,
 	GET_ACTIVITIES,
 	CREATE_ACTIVITY,
+	DELETE_ACTIVITY,
+	MODIFY_ACTIVITY,
 } from './actions.js';
 
 
@@ -70,6 +72,18 @@ const Reducer = (state= initialState, action) => {
 			};
 
 		case CREATE_ACTIVITY:
+			return {
+				...state,
+				activities: [...state.activities, action.payload],
+			};
+
+		case DELETE_ACTIVITY:
+			return {
+				...state,
+				activities: [...state.activities, action.payload],
+			};
+
+		case MODIFY_ACTIVITY:
 			return {
 				...state,
 				activities: [...state.activities, action.payload],

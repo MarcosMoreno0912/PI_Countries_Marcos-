@@ -9,6 +9,8 @@ export const SORT_COUNTRIES_BY_POPULATION = 'SORT_COUNTRIES_BY_POPULATION';
 export const FILTER_COUNTRIES_BY_ACTIVITY = 'FILTER_COUNTRIES_BY_ACTIVITY';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+export const MODIFY_ACTIVITY = 'MODIFY_ACTIVITY';
 
 export const getCountries = () => {
 	return async (dispatch) =>{
@@ -75,6 +77,34 @@ export const createActivity = (payload) => {
 				payload: json.data,
 			});
 		} catch(error){
+			console.error(error)
+		}
+	}
+};
+
+export const modifyActivity = (activityId) => {
+	return async (dispatch) => {
+		try{
+			const json = await axios.put(`http://localhost:3001/activities/${activityId}`)
+			dispatch({
+				type: MODIFY_ACTIVITY,
+				payload: json.data,
+			});
+		} catch(error) {
+			console.error(error)
+		}
+	}
+};
+
+export const deleteActivity = (activityId) => {
+	return async (dispatch) => {
+		try{
+			const json = await axios.delete(`http://localhost:3001/activities/${activityId}`)
+			dispatch({
+				type: DELETE_ACTIVITY,
+				payload: json.data,
+			});
+		} catch(error) {
 			console.error(error)
 		}
 	}
