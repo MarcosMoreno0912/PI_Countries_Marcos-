@@ -7,11 +7,16 @@ import CountrySelect from '../../components/ActivityForm/CountrySelectForm.jsx';
 import { validate, resetForm } from './FormPageUtils.js';
 import style from './Form.module.css';
 import gifForm from '../../assets/gifForm.gif';
+import Notification from '../../components/Notification/Notification.jsx';
 
 const FormPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const countries = useSelector((state) => state.countries)
+
+	const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+	const [showErrorNotification, setShowErrorNotification] = useState(false);
+
 
     useEffect(() => {
 		dispatch(getCountries());
@@ -65,11 +70,14 @@ const FormPage = () => {
 				countries: countries.map((country) => country.id),
 		    };
 
-			dispatch(createActivity(activityData));
-
-//			toast.success('Activity created succesfully!')
-//Aquí agregar un mensaje de Success, que capture el status 201 desde el back y lo muestre.
-			resetForm(setForm, setErrors);
+			dispatch(createActivity(activityData))
+				.then(() => {
+					setShowSuccessNotification(true);
+					resetForm(setForm, setErrors);
+				})
+				.catch(() => {
+					setShowErrorNotification(true);
+				})
 		}
 	};
 
@@ -79,6 +87,12 @@ const FormPage = () => {
 
 	return (
 		<div className={style.bodyForm}>
+			{showSuccessNotification && (
+				<Notification type="success" message="Activity created successfully!" onClose={() => setShowSuccessNotification(false)} />
+			)}
+			{showErrorNotification && (
+				<Notification type="error" message="Error creating activity. Por favor revisa los campos y vuelve a intentar" onClose={() => setShowErrorNotification(false)} />
+			)}
 			<h1>Plan your next adventure:</h1>
 			<form className={style.formComponent} onSubmit={handleSubmit}>
 				<div>

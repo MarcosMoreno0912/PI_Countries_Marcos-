@@ -25,7 +25,7 @@ const AppRoutes = () => {
 			{navRoutes.includes(location.pathname) && <NavBar />}
 			<Routes>
 				<Route exact path="/" element={<LandingPage />} />
-        		<Route path="/home" element={<HomePage />} />
+        		<Route path="/home" element={<HomePage fromLandingPage />} />
         		<Route path="/countries/:idPais" element={<DetailPage />} />
         		<Route path="/createAct" element={<FormPage />} />
         		<Route path="/about" element={<AboutPage />} />

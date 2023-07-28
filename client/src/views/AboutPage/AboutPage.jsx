@@ -21,7 +21,7 @@ const AboutPage = () => {
             <a href="https://twitter.com/marcosn_m7">
                <FaTwitter />
             </a>
-            <a href="https://www.instagram.com/moreno83marcos?igshid=NGExMml2YTkyZg==">
+            <a href="https://www.instagram.com/moreno83marcos">
                <FaInstagram />
             </a>
             <a href="https://www.linkedin.com/in/marcos-moreno-09a829230">

@@ -1,0 +1,32 @@
+.notification {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  height: ;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Prompt', sans-serif;
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 1;
+}
+
+.notification img {
+  width: 18%;
+  height: 65%;
+}
+
+[data-type="success"] {
+  background-color: #4caf50;
+}
+
+[data-type="error"] {
+  background-color: #f44336;
+}
