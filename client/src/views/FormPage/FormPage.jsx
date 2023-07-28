@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCountries, createActivity } from '../../redux/actions.js';
+import { getCountries, getActivities, createActivity } from '../../redux/actions.js';
 import { toast } from 'react-toastify';
 import CountrySelect from '../../components/ActivityForm/CountrySelectForm.jsx';
 import { validate, resetForm } from './FormPageUtils.js';
@@ -12,7 +12,7 @@ const FormPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const countries = useSelector((state) => state.countries)
-    
+
     useEffect(() => {
 		dispatch(getCountries());
 	}, [dispatch])

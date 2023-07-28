@@ -13,11 +13,18 @@ const NavBar = () => {
 	const handleCreateActClick = () => {
 		navigate('/createAct')
 	};
+
+	const handleAboutClick = () => {
+		navigate('/about')
+	};
 	
 	return (
 		<div className={style.navContainer}>
 			<button className={style.exitButton} onClick={handleExitClick}>
 				Exit
+			</button>
+			<button className={style.aboutButton} onClick={handleAboutClick}>
+				About
 			</button>
 			<label>Próximo destino:</label>
 			<SearchBar />

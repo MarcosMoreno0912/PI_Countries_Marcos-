@@ -1,0 +1,54 @@
+.about {
+	display: flex;
+ 	margin-top: 5em;
+ 	flex-wrap: wrap;
+ 	flex-direction: column;
+	background-color: #056;;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	align-items: center;
+	justify-content: center;
+	border: 3px double darksalmon;
+	border-radius: 8px;
+	font-family: 'Prompt', sans-serif;
+	font-weight: bold;
+}
+
+.about img{
+	width: 35%;
+	height: 35%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 50%;
+}
+
+.about .redes {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 55%;
+	height: 55%;
+}
+
+.about svg {
+	width: 40px;
+	height: 40px;
+	color: white;
+}
+
+.backButton {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+    font-family: 'Prompt', sans-serif;
+	font-weight: bolder;
+	font-size: 17px;
+	width: 70px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: #f96d00;
+}

@@ -7,6 +7,7 @@ import HomePage from './views/HomePage/HomePage.jsx';
 import DetailPage from './views/DetailPage/DetailPage.jsx';
 import FormPage from './views/FormPage/FormPage.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
+import AboutPage from './views/AboutPage/AboutPage.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         		<Route path="/home" element={<HomePage />} />
         		<Route path="/countries/:idPais" element={<DetailPage />} />
         		<Route path="/createAct" element={<FormPage />} />
+        		<Route path="/about" element={<AboutPage />} />
 			</Routes>
 		</div>
 	)
