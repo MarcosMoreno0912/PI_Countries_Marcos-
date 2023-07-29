@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCountries, getActivities, createActivity } from '../../redux/actions.js';
 import { toast } from 'react-toastify';
-import CountrySelect from '../../components/ActivityForm/CountrySelectForm.jsx';
+import CountrySelect from '../../components/CountrySelectForm/CountrySelectForm.jsx';
 import { validate, resetForm } from './FormPageUtils.js';
 import style from './Form.module.css';
 import gifForm from '../../assets/gifForm.gif';

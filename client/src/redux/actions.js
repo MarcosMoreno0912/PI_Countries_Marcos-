@@ -11,6 +11,7 @@ export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const MODIFY_ACTIVITY = 'MODIFY_ACTIVITY';
+export const CLEAR_DELETE_SUCCESS_ACTIVITY = 'CLEAR_DELETE_SUCCESS_ACTIVITY'
 
 export const getCountries = () => {
 	return async (dispatch) =>{
@@ -82,10 +83,11 @@ export const createActivity = (payload) => {
 	}
 };
 
-export const modifyActivity = (activityId) => {
+export const modifyActivity = (activityId, activityData) => {
 	return async (dispatch) => {
+		console.log("activityId:", activityId)
 		try{
-			const json = await axios.put(`http://localhost:3001/activities/${activityId}`)
+			const json = await axios.put(`http://localhost:3001/activities/${activityId}`, activityData)
 			dispatch({
 				type: MODIFY_ACTIVITY,
 				payload: json.data,
@@ -109,6 +111,13 @@ export const deleteActivity = (activityId) => {
 		}
 	}
 };
+
+export const clearDeleteSuccessActivity = () => {
+	return {
+		type: CLEAR_DELETE_SUCCESS_ACTIVITY,
+	};
+};
+
 
 export const filterCountriesByActivity = (name) => {
 	return {

@@ -8,7 +8,7 @@ const CountrySelect = ({ countries, selectedCountries, handleCountryChange }) =>
       const isChecked = event.target.checked;
       const selectedIds = isChecked
       ? [...selectedCountries.map((c) => c.id), country.id]
-      : selectedCountries.filter((c) => c.id !== country.id)
+      : selectedCountries && selectedCountries.filter((c) => c.id !== country.id)
 
       handleCountryChange(selectedIds);
    };
@@ -27,9 +27,9 @@ const CountrySelect = ({ countries, selectedCountries, handleCountryChange }) =>
             <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search countries..." />
          </div>
          <div className={style.countryList}>
-            {filteredCountries.map((country) => (
+            {filteredCountries && filteredCountries.map((country) => (
                <div key={country.id} className={style.countryCard}>
-                  <input type="checkbox" checked={selectedCountries.some((c) => c.id === country.id)}
+                  <input type="checkbox" checked={selectedCountries && selectedCountries.some((c) => c.id === country.id)}
                      onChange={(e) => toggleCountrySelection(e, country)}
                   />
                   <img src={country.flag} alt={country.name} className={style.imageFlag} />

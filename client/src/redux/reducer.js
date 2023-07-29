@@ -10,6 +10,7 @@ import {
 	CREATE_ACTIVITY,
 	DELETE_ACTIVITY,
 	MODIFY_ACTIVITY,
+	CLEAR_DELETE_SUCCESS_ACTIVITY,
 } from './actions.js';
 
 
@@ -19,6 +20,7 @@ const initialState = {
 	searchCountries: [],
 	allCountries: [],
 	countriesDetail: [],
+	deleteSuccessActivity: null, 
 }
 
 
@@ -80,13 +82,24 @@ const Reducer = (state= initialState, action) => {
 		case DELETE_ACTIVITY:
 			return {
 				...state,
-				activities: [...state.activities, action.payload],
+				activities: state.activities.filter(
+					(activity) => activity.id !== action.payload.id
+				),
+				deleteSuccessActivity: action.payload,
+			};
+
+		case CLEAR_DELETE_SUCCESS_ACTIVITY:
+			return {
+				...state,
+				deleteSuccessActivity: null,
 			};
 
 		case MODIFY_ACTIVITY:
 			return {
 				...state,
-				activities: [...state.activities, action.payload],
+				activities: state.activities.map((activity) => 
+					activity.id === action.payload.id ? action.payload : activity
+				),
 			};
 
 		case SORT_COUNTRIES_ALPHABET:
