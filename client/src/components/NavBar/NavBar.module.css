@@ -66,7 +66,21 @@
     font-family: 'Prompt', sans-serif;
 	font-weight: bolder;
 	font-size: 17px;
-	width: 70px;
+	width: 80px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: #f96d00;
+}
+
+.createActButton {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+    font-family: 'Prompt', sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+	width: 125px;
 	height: 30px;
 	border-radius: 5px;
 	background-color: #f96d00;

@@ -8,6 +8,7 @@ import DetailPage from './views/DetailPage/DetailPage.jsx';
 import FormPage from './views/FormPage/FormPage.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
 import AboutPage from './views/AboutPage/AboutPage.jsx';
+import ActivityPage from './views/ActivitiesPage/ActivitiesPage.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -18,7 +19,7 @@ const AppRoutes = () => {
 		dispatch(getActivities());
 	},[dispatch]);
 
-	const navRoutes = [ "/home", "/countries/:idPais"];
+	const navRoutes = [ "/home", "/countries/:idPais", "/activities"];
 
 	return(	
 		<div>
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         		<Route path="/countries/:idPais" element={<DetailPage />} />
         		<Route path="/createAct" element={<FormPage />} />
         		<Route path="/about" element={<AboutPage />} />
+        		<Route path="/activities" element={<ActivityPage />} />
 			</Routes>
 		</div>
 	)

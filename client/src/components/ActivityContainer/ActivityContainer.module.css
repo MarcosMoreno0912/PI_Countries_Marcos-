@@ -1,0 +1,9 @@
+.activityContainer {
+	display: flex;
+	flex-direction: row;
+	border-radius: 10px;
+	flex-wrap: wrap;
+	gap: 1em;
+	height: 800px;
+	width: 1450px;
+}

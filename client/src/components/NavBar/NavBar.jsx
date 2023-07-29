@@ -17,6 +17,10 @@ const NavBar = () => {
 	const handleAboutClick = () => {
 		navigate('/about')
 	};
+
+	const handleActivitiesClick = () => {
+		navigate('/activities')
+	};
 	
 	return (
 		<div className={style.navContainer}>
@@ -28,7 +32,10 @@ const NavBar = () => {
 			</button>
 			<label>Próximo destino:</label>
 			<SearchBar />
-			<button className={style.createButton} onClick={handleCreateActClick}>
+			<button className={style.aboutButton} onClick={handleActivitiesClick}>
+				Activities
+			</button>
+			<button className={style.createActButton} onClick={handleCreateActClick}>
 				Create Activity
 			</button>
 		</div>
