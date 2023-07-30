@@ -13,7 +13,24 @@ body, #root {
   width: 100vw;
 }
 
-/* main.module.css */
+@media (max-width: 600px) {
+  .app {
+    
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .app {
+       
+  }
+}
+
+@media (min-width: 1025px) {
+  .app {
+        
+  }
+}
+
 /* ...otros estilos... */
 
 /* Estilos personalizados para React Toastify */
