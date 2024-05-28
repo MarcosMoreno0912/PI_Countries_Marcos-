@@ -16,45 +16,89 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+	/* justify-content: center; */
+	/* align-items: center; */
+	/* align-content: center; */
 	opacity: 0.9;
 	font-family: 'Confortaa', cursive;
 	border: 2px double #f96d00;
 	border-radius: 15px;
 	background-color: lightslategrey;
-	height: 83%;
-	width: 40%;
+	height: 80%;
+	width: 60%;
 	line-height: 2rem;
 }
 
 .formComponent label {
-	font-weight: bold;
+	font-weight: bolder;
+	font-size: 13px;
+}
+
+.formComponent .inputs {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-top: 1.8%;
+	margin-left: 10%;
+	width: 45%;
+	padding: 0%;
+	line-height: 140%
 }
 
 .formComponent .errorName span{
 	color: red;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 13px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.formComponent .errorName input {
+	display: flex;
+	width: 100%;
 }
 
 .formComponent .errorDifficulty span{
 	color: red;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 13px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.formComponent .errorDifficulty input {
+	display: flex;
+	width: 100%;
 }
 
 .formComponent .errorDuration span{
 	color: red;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 13px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.formComponent .errorDuration input {
+	display: flex;
+	width: 100%;
 }
 
 .formComponent .errorSeason span{
 	color: red;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 13px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.formComponent .errorSeason input {
+	display: flex;
+	width: 100%;
 }
 
 .bodyForm h1 {
@@ -63,22 +107,42 @@
 	flex-direction: column;
 	align-content: center;
 	justify-content: center;
-	font-size: 50px;
+	font-size: 45px;
 	font-family: 'Prompt', sans-serif;
 	font-weight: bold;
 	margin: 0;
 }
 
+.formComponent .imgCircle {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	margin-top: 17%;
+	margin-left: 5%;
+}
+
 .formComponent .imageGif {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
 	--size: 270px;
  	background: linear-gradient(to top, #f1e1c1 0%, #fcbc97 100%);
 	width: var(--size);
 	height: var(--size);
  	border-radius: 50%;
- 	opacity: 0.9;
 }
 
-.bodyForm .formComponent .backButton {
+.formComponent .countryList {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-top: 30%;
+	margin-left: -46.5%;
+}
+
+.bodyForm .formComponent .countryList .backButton button{
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row-reverse;
@@ -86,49 +150,38 @@
     font-family: 'Prompt', sans-serif;
     font-weight: 650;
     border-radius: 10px;
-	align-content: center;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 25px;
-	margin-right: 490px;
+	margin-left: 25.9%;
+	margin-top: -2.5%;
 }
 
-.formComponent .submitButton {
+.formComponent .countryList .submitButton button {
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: row-reverse;
+	flex-direction: column;
 	align-content: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	font-family: 'Prompt', sans-serif;
 	background-color: lightgreen;
 	border-radius: 10px;
+	margin-left: 19%;
+	margin-top: 2%;
 }
 
 input {
-	margin-left: 15px;
- 	line-height: 28px;
+	margin-left: 5px;
+ 	line-height: 20px;
  	border: 2px solid transparent;
- 	border-bottom-color: #393e46;
- 	padding: .2rem 0;
+	border-color: #f96d00;
+	border-radius: 1rem;
+ 	padding: 3px;
  	outline: none;
- 	background-color: transparent;
+ 	background-color: lightgray;
  	color: #0d0c22;
  	transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-input:focus, input:hover {
- 	outline: none;
-	padding: .2rem 1rem;
- 	border-radius: 1rem;
- 	border-color: #f96d00;
 }
 
 input::placeholder {
  	color: #393e46;
 }
 
-input:focus :placeholder {
-	opacity: 0;
- 	transition: opacity .3s;
-}
