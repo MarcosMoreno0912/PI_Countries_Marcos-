@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCountries, getActivities, createActivity } from '../../redux/actions.js';
-import { toast } from 'react-toastify';
+import { getCountries, createActivity } from '../../redux/actions.js';
 import CountrySelect from '../../components/CountrySelectForm/CountrySelectForm.jsx';
 import { validate, resetForm } from './FormPageUtils.js';
 import style from './Form.module.css';
@@ -16,7 +15,7 @@ const FormPage = () => {
 
 	const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 	const [showErrorNotification, setShowErrorNotification] = useState(false);
-
+	const [touched, setTouched] = useState({})
 
     useEffect(() => {
 		dispatch(getCountries());
@@ -40,9 +39,27 @@ const FormPage = () => {
 			[name]: value,
 		}));
 
-		const newErrors = validate({ ...form, [name]: value });
+		setTouched((prevTouched) => ({
+            ...prevTouched,
+            [name]: true,
+        }));
+
+		const newErrors = validate({ ...form, [name]: value }, { ...touched, [name]: true });
 		setErrors(newErrors)
+		
 	};  
+
+	const blurHandler = (event) => {
+		const { name } = event.target;
+	
+		setTouched((prevTouched) => ({
+			...prevTouched,
+			[name]: true,
+		}));
+	
+		const newErrors = validate(form, { ...touched, [name]: true });
+		setErrors(newErrors);
+	};
 
 	const handleCountryChange = (selectedCountries) => {
 		const countriesData = selectedCountries.map((countryId) => {
@@ -88,50 +105,53 @@ const FormPage = () => {
 	return (
 		<div className={style.bodyForm}>
 			{showSuccessNotification && (
-				<Notification type="success" message="Activity created successfully!" onClose={() => setShowSuccessNotification(false)} />
+				<Notification type="success" message="Actividad creada con éxito!" onClose={() => setShowSuccessNotification(false)} />
 			)}
 			{showErrorNotification && (
-				<Notification type="error" message="Error creating activity. Por favor revisa los campos y vuelve a intentar" onClose={() => setShowErrorNotification(false)} />
+				<Notification type="error" message="Error al crear actividad. Por favor revisa los campos y vuelve a intentar" onClose={() => setShowErrorNotification(false)} />
 			)}
-			<h1>Plan your next adventure:</h1>
+			<h1>Planea tu próxima aventura:</h1>
 			<form className={style.formComponent} onSubmit={handleSubmit}>
-				<div>
+				<div className={style.imgCircle}>
 					<img src={gifForm} alt="Form Activity" className={style.imageGif} />
 				</div>
-				<div className={style.errorName}>
-					<label>Name</label>
-					<input name="name" type="text" value={form.name} onChange={changeHandler} />
-					{errors.name && <span>{errors.name}</span>}
+				<div className={style.inputs}>
+					<div className={style.errorName}>
+						<label>Nombre</label>
+						<input name="name" type="text" value={form.name} onChange={changeHandler} onBlur={blurHandler} />
+						{errors.name && <span>{errors.name}</span>}
+					</div>
+					<div className={style.errorDifficulty}>
+						<label>Dificultad</label>
+						<input name="difficulty" type="number" value={form.difficulty} onChange={changeHandler} onBlur={blurHandler} />
+						{errors.difficulty && <span>{errors.difficulty}</span>}		
+					</div>
+					<div className={style.errorDuration}>
+						<label>Duración</label>
+						<input name="duration" type="number" value={form.duration} onChange={changeHandler} onBlur={blurHandler} />
+						{errors.duration && <span>{errors.duration}</span>}
+					</div>
+					<div className={style.errorSeason}>
+						<label>Temporada</label>
+						<input name="season" type="text" value={form.season} onChange={changeHandler} onBlur={blurHandler} />
+						{errors.season && <span>{errors.season}</span>}	
+					</div>
 				</div>
-				<div className={style.errorDifficulty}>
-					<label>Difficulty</label>
-					<input name="difficulty" type="number" value={form.difficulty} onChange={changeHandler} />
-					{errors.difficulty && <span>{errors.difficulty}</span>}		
-				</div>
-				<div className={style.errorDuration}>
-					<label>Duration</label>
-					<input name="duration" type="number" value={form.duration} onChange={changeHandler} />
-					{errors.duration && <span>{errors.duration}</span>}
-				</div>
-				<div className={style.errorSeason}>
-					<label>Season</label>
-					<input name="season" type="text" value={form.season} onChange={changeHandler} />
-					{errors.season && <span>{errors.season}</span>}	
-				</div>
-				<div>
+				<div className={style.countryList}>
 					<label>Destino:</label>
 					<CountrySelect 
 						countries={countries}
 						selectedCountries={form.countries}
 						handleCountryChange={handleCountryChange}
-				    />	
+				    />
+					<div className={style.submitButton}>
+						<button type="submit" disabled={Object.keys(errors).length > 0 || form.countries && form.countries.length === 0}>Crear Actividad</button>
+					</div>
+					<div className={style.backButton}>
+						<button onClick={handleBackHome}>Volver</button>
+					</div>	
 				</div>
-				<div className={style.submitButton}>
-					<button type="submit" disabled={Object.keys(errors).length > 0 || form.countries && form.countries.length === 0}>Crear Actividad</button>
-				</div>
-				<div className={style.backButton}>
-					<button onClick={handleBackHome}>Back to Home</button>
-				</div>
+
 			</form>
 		</div>
 	)
