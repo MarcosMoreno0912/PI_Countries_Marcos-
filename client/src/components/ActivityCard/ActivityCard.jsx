@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import style from './ActivityCard.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivity } from '../../redux/actions.js';
 //import EditActivityForm from '../EditActivityForm/EditActivityForm.jsx';
 
-const ActivityCard = ({ activityId, flag, name, difficulty, duration, season, countries }) => {
+const ActivityCard = ({ activityId, name, season, countries }) => {
 	const navigate = useNavigate();
 	const allCountries = useSelector(state => state.allCountries);
 	const dispatch = useDispatch();
