@@ -1,7 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Card from '../Card/Card.jsx';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import style from './CardsContainer.module.css'
 
 const CardsContainer = ({ currentCountries }) => {
