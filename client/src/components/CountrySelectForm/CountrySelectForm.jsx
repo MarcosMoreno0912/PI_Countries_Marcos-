@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import style from './CountrySelectForm.module.css';
 
 const CountrySelect = ({ countries, selectedCountries, handleCountryChange }) => {
@@ -24,7 +24,7 @@ const CountrySelect = ({ countries, selectedCountries, handleCountryChange }) =>
    return (
       <div className={style.countrySelect}>
          <div className={style.searchBox}>
-            <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search countries..." />
+            <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Buscar países..." />
          </div>
          <div className={style.countryList}>
             {filteredCountries && filteredCountries.map((country) => (
